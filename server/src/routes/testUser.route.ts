@@ -18,10 +18,6 @@ const router = express.Router();
 // });
 
 // Register user
-router.post(
-  '/api/users',
-  validateRequest(createTestUserSchema),
-  registerTestUser
-);
+router.post('/', validateRequest(createTestUserSchema), registerTestUser);
 
 export default router;

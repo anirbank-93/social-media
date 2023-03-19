@@ -11,7 +11,7 @@ const router = express.Router();
 //   });
 // });
 
-router.use('/test-users', testUserRoutes);
-router.use('/test-posts', testPostRoutes);
+router.use('/api/test-users', testUserRoutes);
+router.use('/api/test-posts', testPostRoutes);
 
 export default router;
