@@ -60,6 +60,8 @@ export async function getPostByIdHandler(req: Request, res: Response) {
 export async function updatePostHandler(req: Request, res: Response) {
   try {
     const postId = get(req, 'params.postId');
+    // const userId = get(req, 'user._id');
+
     let update = req.body;
 
     const post = await findFromDbById({ _id: postId });
@@ -70,6 +72,10 @@ export async function updatePostHandler(req: Request, res: Response) {
         message: 'Invalid id. Post not found.',
       });
     }
+
+    // if (String(post.user) != userId) {
+    //   return res.status(401).send({ message: 'User not authorized' });
+    // }
 
     const updatedPost = await findAndUpdate({ _id: postId }, update, {
       new: true,
@@ -93,6 +99,7 @@ export async function updatePostHandler(req: Request, res: Response) {
 export async function deletePostHandler(req: Request, res: Response) {
   try {
     const postId = get(req, 'params.postId');
+    // const userId = get(req, 'user._id');
 
     const post = await deleteFromDb({ _id: postId });
 
@@ -102,6 +109,10 @@ export async function deletePostHandler(req: Request, res: Response) {
         message: 'Invalid id. Post not found.',
       });
     }
+
+    // if (String(post.user) != userId) {
+    //   return res.status(401).send({ message: 'User not authorized' });
+    // }
 
     return res.status(200).json({
       status: true,
