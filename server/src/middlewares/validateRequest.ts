@@ -1,7 +1,12 @@
-import { AnySchema } from 'yup';
+import { AnySchema, ObjectSchema, object } from 'yup';
 import { Request, Response, NextFunction } from 'express';
-
 import log from '../logger';
+
+// interface IncomingRequest {
+//   body: object;
+//   query: object;
+//   params: object;
+// }
 
 const validate =
   (schema: AnySchema) =>
@@ -14,9 +19,9 @@ const validate =
       });
 
       return next();
-    } catch (err: any) {
-      log.error(err);
-      return res.status(400).send(err.message);
+    } catch (e: any) {
+      log.error(e, 'thisisisis');
+      return res.status(400).send({ error: e.errors });
     }
   };
 
