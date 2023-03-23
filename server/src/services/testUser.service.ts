@@ -1,6 +1,8 @@
-import userModel from '../models/testUser.model';
+import { ObtainDocumentType } from 'mongoose';
 
-export async function createTestUser(input: any) {
+import userModel, { UserDocument } from '../models/testUser.model';
+
+export async function createTestUser(input: ObtainDocumentType<UserDocument>) {
   try {
     return await userModel.create(input);
   } catch (err: any) {
