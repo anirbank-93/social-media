@@ -7,9 +7,15 @@ import { saveToDb, findPosts } from '../services/post.service';
 import log from '../logger';
 
 export const createPost = async (req: Request, res: Response) => {
-  const body = req.body;
+  const saveData = {
+    creator: req.body.creator,
+    title: req.body.title,
+    description: req.body.description,
+    tags: req.body.tags.split(','),
+    file: req.body.file,
+  };
   try {
-    const post = await saveToDb(body);
+    const post = await saveToDb(saveData);
 
     return res.status(201).json({
       status: true,

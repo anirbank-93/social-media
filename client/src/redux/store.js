@@ -3,10 +3,11 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 
 // Reducers
-import { getPostsReducers } from './reducers/postReducer';
+import { createPostReducer, getPostsReducer } from './reducers/postReducer';
 
 const reducers = combineReducers({
-  getPosts: getPostsReducers,
+  getPosts: getPostsReducer,
+  createPost: createPostReducer,
 });
 
 const middleware = [thunk];

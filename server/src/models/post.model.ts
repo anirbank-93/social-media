@@ -3,7 +3,8 @@ import mongoose from 'mongoose';
 import { UserDocument } from './testUser.model';
 
 export interface PostDocument extends mongoose.Document {
-  user: UserDocument['_id'];
+  // user: UserDocument['_id'];
+  creator: string;
   title: string;
   description: string;
   tags: [];
@@ -13,7 +14,11 @@ export interface PostDocument extends mongoose.Document {
 
 const POST_SCHEMA = new mongoose.Schema(
   {
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'test_user' },
+    // user: { type: mongoose.Schema.Types.ObjectId, ref: 'test_user' },
+    creator: {
+      type: String,
+      required: true,
+    },
     title: {
       type: String,
       required: true,

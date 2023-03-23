@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:1337';
-
 import { API_NOTIFICATION_MESSAGES, SERVICE_URLS } from '../constants/config';
+
+const API_URL = 'http://localhost:1337';
 
 const axiosInstance = axios.create({
   baseURL: API_URL,
@@ -16,8 +16,8 @@ axiosInstance.interceptors.request.use(
   function (config) {
     return config;
   },
-  function (err) {
-    return Promise.reject(err);
+  function (error) {
+    return Promise.reject(error);
   }
 );
 
@@ -37,7 +37,7 @@ axiosInstance.interceptors.response.use(
 // if fail = return { isFailure: true, string, msg: string, code: int }
 //////////////////////////////
 const processResponse = (response) => {
-  if (response?.status == 200 || response?.status == 201) {
+  if (response?.status === 200 || response?.status === 201) {
     return { isSuccess: true, data: response.data };
   } else {
     return {
@@ -85,7 +85,7 @@ const processError = (error) => {
 const JSON_API = {};
 
 for (const [key, value] of Object.entries(SERVICE_URLS)) {
-  JSON_API[key] = (body, showUploadProgress, showDownloadProgress) => {
+  JSON_API[key] = (body, showUploadProgress, showDownloadProgress) =>
     axiosInstance({
       method: value.method,
       url: value.url,
@@ -108,7 +108,6 @@ for (const [key, value] of Object.entries(SERVICE_URLS)) {
         }
       },
     });
-  };
 }
 
 export { JSON_API };
