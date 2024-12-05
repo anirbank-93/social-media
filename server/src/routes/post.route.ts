@@ -6,12 +6,17 @@ const router = express.Router();
 import { validateRequest } from '../middlewares';
 
 // Schemas
-import { createPostSchema } from '../schemas/post.schema';
+import {
+  createPostSchema,
+  getPostSchema,
+  updatePostSchema,
+} from '../schemas/post.schema';
 
 // Controllers
 import { createPost, getPosts } from '../controllers/post.controller';
 
 router.post('/', validateRequest(createPostSchema), createPost);
 router.get('/', getPosts);
+router.patch('/:id', validateRequest(updatePostSchema));
 
 export default router;

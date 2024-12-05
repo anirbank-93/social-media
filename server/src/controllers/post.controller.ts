@@ -11,7 +11,7 @@ export const createPost = async (req: Request, res: Response) => {
     creator: req.body.creator,
     title: req.body.title,
     description: req.body.description,
-    tags: req.body.tags.split(','),
+    tags: req.body.tags ? req.body.tags.split(',') : [],
     file: req.body.file,
   };
   try {
